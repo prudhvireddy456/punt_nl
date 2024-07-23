@@ -16,22 +16,6 @@ stt =DeepgramClient(os.getenv('DG_API_KEY'))
 def get_gemini_response(question):
     response=model.generate_content(question)
     return str(response.text)
-def get_audio(text):
-    print(text)
-    response=get_gemini_response(text)
-    print(response)
-    SPEAK_OPTIONS = {"text": response}
-    filename ='static/output.wav'
-    try:
-        options = SpeakOptions(
-        model="aura-asteria-en",
-        encoding="linear16",
-        container="wav"
-        )
-        res=stt.speak.v('1').save(filename, SPEAK_OPTIONS, options)
-    except Exception as e:
-        response = None
-    return str(response)
 @app.route('/',methods=['GET','POST'])
 def hello():
     text=''
@@ -50,7 +34,7 @@ def hello():
             )
             res=stt.speak.v('1').save(filename, SPEAK_OPTIONS, options)
        except Exception as e:
-            response = None
+            print(e)
         print(response)
         exp={
             'a': response 
