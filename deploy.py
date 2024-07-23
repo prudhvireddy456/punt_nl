@@ -22,19 +22,8 @@ def hello():
     if request.method=='POST':
         text=str(request.form['transcript'])
         print(text)
-        reponse=get_gemini_response(text)
+        response=model.generate_content(text)
         print(response)
-        SPEAK_OPTIONS = {"text": response}
-        filename ='static/output.wav'
-        try:
-            options = SpeakOptions(
-            model="aura-asteria-en",
-            encoding="linear16",
-            container="wav"
-            )
-            res=stt.speak.v('1').save(filename, SPEAK_OPTIONS, options)
-       except Exception as e:
-            print(e)
         print(response)
         exp={
             'a': response 
