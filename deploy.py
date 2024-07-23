@@ -26,7 +26,7 @@ def hello():
         print(response)
         print(response)
         exp={
-            'a': response 
+            'a': response.text
         }
     else:
         exp={
